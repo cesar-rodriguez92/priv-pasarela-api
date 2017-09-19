@@ -28,7 +28,7 @@ public class EndpointController {
 
 	}
 
-	@RequestMapping(value = "/test3", method = RequestMethod.GET)
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
 	public String enpoint4() {
 		System.out.println("SYSOUT: llego a endpoint 4");
 		logger.info("logger: llego a endpoint 4");
