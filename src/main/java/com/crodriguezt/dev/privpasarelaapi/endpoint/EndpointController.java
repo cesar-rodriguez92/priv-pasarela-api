@@ -15,7 +15,7 @@ public class EndpointController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/test3", method = RequestMethod.GET)
+	@RequestMapping(value = "/test3", method = RequestMethod.POST)
 	public String endpoint3(@RequestParam Map<String, String> allRequestParams) {
 		logger.info("\n\n\n\n\n");
 		logger.info("-> Llego a endpoint2 test2");
