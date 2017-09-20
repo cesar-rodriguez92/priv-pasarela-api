@@ -53,26 +53,32 @@ public class EndpointController {
 		String textToHash = apiKey + separador + merchantId + separador + referenceCode + separador + monto + separador
 				+ moneda;
 		byte[] encodedHash = null;
+		System.out.println("Inicia proceso hash");
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			System.out.println("MD instance ok");
 			encodedHash = md.digest(textToHash.getBytes("UTF-8"));
+			System.out.println("encodedHash: md.digest OK" );
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("hash: " + bytesToHex(encodedHash));
+		System.out.println("sysout hash: " + bytesToHex(encodedHash));
 		resultado = bytesToHex(encodedHash);
 		return "Hash: " + resultado;
 	}
 
 	private static String bytesToHex(byte[] hash) {
+		System.out.println("en funcion: "+ hash);
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < hash.length; i++) {
 			String hex = Integer.toHexString(0xff & hash[i]);
 			if (hex.length() == 1) {
+				System.out.println("-->sb: "+ sb);
 				sb.append("0");
 				sb.append(hex);
+				System.out.println("----->sb: "+ sb);
 			}
 		}
 		return sb.toString();
