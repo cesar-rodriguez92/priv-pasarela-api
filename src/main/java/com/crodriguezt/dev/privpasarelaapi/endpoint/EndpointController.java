@@ -1,5 +1,6 @@
 package com.crodriguezt.dev.privpasarelaapi.endpoint;
 
+import java.security.MessageDigest;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -35,13 +36,46 @@ public class EndpointController {
 
 		return "Respuesta exitosa";
 	}
-	
+
 	@RequestMapping(value = "/test4", method = RequestMethod.POST)
 	public String enpoint5() {
 		System.out.println("SYSOUT: llego a endpoint 4");
 		logger.info("logger: llego a endpoint 4");
 
 		return "Respuesta exitosa";
+	}
+
+	@RequestMapping(value = "/test5", method = RequestMethod.GET)
+	public String generateSignature(@RequestParam String apiKey, @RequestParam String merchantId,
+			@RequestParam String referenceCode, @RequestParam String monto, @RequestParam String moneda) {
+		String resultado = "";
+		String separador = "~";
+		String textToHash = apiKey + separador + merchantId + separador + referenceCode + separador + monto + separador
+				+ moneda;
+		byte[] encodedHash = null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			encodedHash = md.digest(textToHash.getBytes("UTF-8"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("hash: " + bytesToHex(encodedHash));
+		resultado = bytesToHex(encodedHash);
+		return "Hash: " + resultado;
+	}
+
+	private static String bytesToHex(byte[] hash) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < hash.length; i++) {
+			String hex = Integer.toHexString(0xff & hash[i]);
+			if (hex.length() == 1) {
+				sb.append("0");
+				sb.append(hex);
+			}
+		}
+		return sb.toString();
 	}
 
 }
