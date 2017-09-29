@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crodriguezt.dev.privpasarelaapi.common.GenericUtils;
+
 @RestController
 @RequestMapping("/v1")
 public class EndpointController {
@@ -64,24 +66,17 @@ public class EndpointController {
 			e.printStackTrace();
 		}
 
-		System.out.println("sysout hash: " + bytesToHex(encodedHash));
-		resultado = bytesToHex(encodedHash);
+		System.out.println("sysout hash: " + GenericUtils.bytesToHex(encodedHash));
+		resultado = GenericUtils.bytesToHex(encodedHash);
 		return "Hash: " + resultado;
 	}
-
-	private static String bytesToHex(byte[] hash) {
-		System.out.println("en funcion: "+ hash);
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < hash.length; i++) {
-			String hex = Integer.toHexString(0xff & hash[i]);
-			if (hex.length() == 1) {
-				System.out.println("-->sb: "+ sb);
-				sb.append("0");
-				sb.append(hex);
-				System.out.println("----->sb: "+ sb);
-			}
-		}
-		return sb.toString();
+	
+	@RequestMapping(value="/logger", method=RequestMethod.GET)
+	public String simulateLogSave(){
+		logger.info("Grabando en base de datos");
+		
+		return "LOG-OK";
 	}
+	
 
 }
