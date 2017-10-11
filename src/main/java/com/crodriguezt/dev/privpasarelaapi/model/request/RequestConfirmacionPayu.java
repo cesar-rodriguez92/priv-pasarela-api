@@ -18,9 +18,12 @@ public class RequestConfirmacionPayu {
 	private String payment_method_type;
 	private String installments_number;
 	private BigDecimal value;
+	private BigDecimal tax;
+	private BigDecimal additional_value;
 	private String transaction_date;
 	private String currency;
 	private String email_buyer;
+	private String cus;
 	private String description;
 	private String account_number_ach;
 	private String account_type_ach;
@@ -266,19 +269,47 @@ public class RequestConfirmacionPayu {
 		this.payment_method_name = payment_method_name;
 	}
 
+	public BigDecimal getTax() {
+		return tax;
+	}
+
+	public void setTax(BigDecimal tax) {
+		this.tax = tax;
+	}
+
+	public BigDecimal getAdditional_value() {
+		return additional_value;
+	}
+
+	public void setAdditional_value(BigDecimal additional_value) {
+		this.additional_value = additional_value;
+	}
+
+	public String getCus() {
+		return cus;
+	}
+
+	public void setCus(String cus) {
+		this.cus = cus;
+	}
+
 	@Override
 	public String toString() {
 		return "RequestConfirmacionPayu [merchant_id=" + merchant_id + ", state_pol=" + state_pol + ", risk=" + risk
 				+ ", response_code_pol=" + response_code_pol + ", reference_sale=" + reference_sale + ", reference_pol="
 				+ reference_pol + ", sign=" + sign + ", extra1=" + extra1 + ", extra2=" + extra2 + ", extra3=" + extra3
 				+ ", payment_method=" + payment_method + ", payment_method_type=" + payment_method_type
-				+ ", installments_number=" + installments_number + ", value=" + value + ", transaction_date="
-				+ transaction_date + ", currency=" + currency + ", email_buyer=" + email_buyer + ", description="
-				+ description + ", account_number_ach=" + account_number_ach + ", account_type_ach=" + account_type_ach
+				+ ", installments_number=" + installments_number + ", value=" + value + ", tax=" + tax
+				+ ", additional_value=" + additional_value + ", transaction_date=" + transaction_date + ", currency="
+				+ currency + ", email_buyer=" + email_buyer + ", cus=" + cus + ", description=" + description
+				+ ", account_number_ach=" + account_number_ach + ", account_type_ach=" + account_type_ach
 				+ ", administrative_fee=" + administrative_fee + ", attempts=" + attempts + ", date=" + date
 				+ ", authorization_code=" + authorization_code + ", payment_method_id=" + payment_method_id
 				+ ", payment_request_state=" + payment_request_state + ", response_message_pol=" + response_message_pol
 				+ ", transaction_id=" + transaction_id + ", payment_method_name=" + payment_method_name + "]";
 	}
 
+
+	
+	
 }
