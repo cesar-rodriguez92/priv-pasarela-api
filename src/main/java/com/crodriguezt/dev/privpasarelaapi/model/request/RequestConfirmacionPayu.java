@@ -53,6 +53,12 @@ public class RequestConfirmacionPayu {
 	private String ip;
 	private String nickname_buyer;
 	private String nickname_seller;
+	
+	
+	private String test;
+	
+	
+	
 	public String getMerchant_id() {
 		return merchant_id;
 	}
@@ -347,6 +353,12 @@ public class RequestConfirmacionPayu {
 	public void setNickname_seller(String nickname_seller) {
 		this.nickname_seller = nickname_seller;
 	}
+	public String getTest() {
+		return test;
+	}
+	public void setTest(String test) {
+		this.test = test;
+	}
 	@Override
 	public String toString() {
 		return "RequestConfirmacionPayu [merchant_id=" + merchant_id + ", state_pol=" + state_pol + ", risk=" + risk
@@ -367,8 +379,10 @@ public class RequestConfirmacionPayu {
 				+ billing_city + ", billing_country=" + billing_country + ", commision_pol=" + commision_pol
 				+ ", commision_pol_currency=" + commision_pol_currency + ", error_code_bank=" + error_code_bank
 				+ ", error_message_bank=" + error_message_bank + ", exchange_rate=" + exchange_rate + ", ip=" + ip
-				+ ", nickname_buyer=" + nickname_buyer + ", nickname_seller=" + nickname_seller + "]";
+				+ ", nickname_buyer=" + nickname_buyer + ", nickname_seller=" + nickname_seller + ", test=" + test
+				+ "]";
 	}
+
 	
 	
 
