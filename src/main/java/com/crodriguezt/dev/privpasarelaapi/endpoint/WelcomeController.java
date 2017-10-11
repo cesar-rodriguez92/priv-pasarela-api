@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crodriguezt.dev.privpasarelaapi.model.request.RequestConfirmacionPayu;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @RestController
 public class WelcomeController {
 
@@ -43,6 +46,11 @@ public class WelcomeController {
 			System.out.println("--->" + key + ":\t\t\t" + request.get(key));
 		}
 		System.out.println("------------->>Fin print map");
+		
+		System.out.println("---->COnver map to pojo");
+	    final ObjectMapper mapper = new ObjectMapper();
+	    RequestConfirmacionPayu confirm =  mapper.convertValue(request, RequestConfirmacionPayu.class);
+	    System.out.println("POJO: " + confirm);
 		return respuesta;
 	}
 
