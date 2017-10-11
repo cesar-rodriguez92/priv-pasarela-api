@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,7 +34,7 @@ public class WelcomeController {
 	}
 	
 	@RequestMapping(value = "/confirmacionPagoPayu2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String confirmacionPagoPasarela2(Map<String, Object> request) {
+	public String confirmacionPagoPasarela2(@RequestParam Map<String, Object> request) {
 		String respuesta = "OK";
 		System.out.println("----->Inicio llamada a WS de Confirmacion:");
 		System.out.println("Map: " + request);
