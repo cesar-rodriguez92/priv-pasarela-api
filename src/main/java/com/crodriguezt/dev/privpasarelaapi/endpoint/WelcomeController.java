@@ -35,14 +35,14 @@ public class WelcomeController {
 	
 	@RequestMapping(value = "/confirmacionPagoPayu2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String confirmacionPagoPasarela2(@RequestParam Map<String, Object> request) {
-		String respuesta = "OK";
-		System.out.println("----->Inicio llamada a WS de Confirmacion:");
+		String respuesta = "200";
+		System.out.println("------------->Inicio llamada a WS de Confirmacion:");
 		System.out.println("Map: " + request);
 		System.out.println("----------->detailed Map");
 		for (String key : request.keySet()) {
 			System.out.println("--->" + key + ":\t\t\t" + request.get(key));
 		}
-		System.out.println("------>Fin print map");
+		System.out.println("------------->>Fin print map");
 		return respuesta;
 	}
 
