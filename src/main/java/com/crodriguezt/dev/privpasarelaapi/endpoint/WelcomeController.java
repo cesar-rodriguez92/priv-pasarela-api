@@ -37,7 +37,7 @@ public class WelcomeController {
 	}
 	
 	@RequestMapping(value = "/confirmacionPagoPayu2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String confirmacionPagoPasarela2(@RequestParam Map<String, Object> request) {
+	  public String confirmacionPagoPasarela(@RequestParam Map<String, Object> request) {
 		String respuesta = "200";
 		System.out.println("------------->Inicio llamada a WS de Confirmacion:");
 		System.out.println("Map: " + request);
@@ -47,10 +47,10 @@ public class WelcomeController {
 		}
 		System.out.println("------------->>Fin print map");
 		
-		System.out.println("---->COnver map to pojo");
-	    final ObjectMapper mapper = new ObjectMapper();
+		System.out.println("---->Convert map to pojo");
+	    /*final ObjectMapper mapper = new ObjectMapper();
 	    RequestConfirmacionPayu confirm =  mapper.convertValue(request, RequestConfirmacionPayu.class);
-	    System.out.println("POJO: " + confirm);
+	    System.out.println("POJO: " + confirm);*/
 		return respuesta;
 	}
 
