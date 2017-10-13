@@ -3,6 +3,8 @@ package com.crodriguezt.dev.privpasarelaapi.endpoint;
 import java.security.MessageDigest;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,9 +74,10 @@ public class EndpointController {
 	}
 	
 	@RequestMapping(value="/logger", method=RequestMethod.GET)
-	public String simulateLogSave(){
+	public String simulateLogSave( HttpServletRequest request){
 		logger.info("Grabando en base de datos");
-		
+		logger.info("IP: " + request.getRemoteAddr());
+		logger.info("IP: " + request.getRemoteUser());
 		return "LOG-OK";
 	}
 	

@@ -2,6 +2,8 @@ package com.crodriguezt.dev.privpasarelaapi.endpoint;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.MediaType;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +39,7 @@ public class WelcomeController {
 	}
 	
 	@RequestMapping(value = "/confirmacionPagoPayu2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	  public String confirmacionPagoPasarela(@RequestParam Map<String, Object> request) {
+	  public String confirmacionPagoPasarela(@RequestParam Map<String, Object> request, HttpServletRequest request2) {
 		String respuesta = "200";
 		System.out.println("------------->Inicio llamada a WS de Confirmacion:");
 		System.out.println("Map: " + request);
@@ -48,6 +50,9 @@ public class WelcomeController {
 		System.out.println("------------->>Fin print map");
 		
 		System.out.println("---->Convert map to pojo");
+		System.out.println("Address: " + request2.getRemoteAddr());
+		System.out.println("IP: " + request2.getRemoteHost() );
+		System.out.println("User: " + request2.getRemoteUser());
 	    /*final ObjectMapper mapper = new ObjectMapper();
 	    RequestConfirmacionPayu confirm =  mapper.convertValue(request, RequestConfirmacionPayu.class);
 	    System.out.println("POJO: " + confirm);*/
