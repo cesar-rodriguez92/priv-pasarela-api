@@ -1,7 +1,14 @@
 package com.crodriguezt.dev.privpasarelaapi.endpoint;
 
+import java.math.BigDecimal;
 import java.security.MessageDigest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crodriguezt.dev.privpasarelaapi.common.GenericUtils;
+import com.crodriguezt.dev.privpasarelaapi.model.response.ResponseCrearInvoice;
 
 @RestController
 @RequestMapping("/v1")
@@ -85,4 +93,37 @@ public class EndpointController {
 		return "LOG-OK";
 	}
 
+	@RequestMapping(value = "/erp/invoice/crear", method = RequestMethod.GET)
+	public ResponseCrearInvoice crearInvoiceErp() {
+
+		ResponseCrearInvoice response = new ResponseCrearInvoice();
+
+		String uuid = UUID.randomUUID().toString();
+		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
+		int internalID = ThreadLocalRandom.current().nextInt(1020030, 1020099);
+		int consecutive = ThreadLocalRandom.current().nextInt(10000, 10200);
+		String fechaHoy = obtenerFechaHoyDDMMYYYY();
+		System.out.println("SYSOUT: llego a /erp/invoice/crear");
+		logger.info("logger: llego a /erp/invoice/crear");
+
+		response.setStatus("OK");
+		response.setMessage("Success");
+		response.setUuid(uuid);
+		response.setIdlog(String.valueOf(idLog));
+		response.setInternalID(new BigDecimal(internalID));
+		response.setConsecutive("BO-2018" + consecutive);
+		response.setDate(fechaHoy);
+
+		return response;
+	}
+
+	public static String obtenerFechaHoyDDMMYYYY() {
+
+		Date date = Calendar.getInstance().getTime();
+		DateFormat formatter = new SimpleDateFormat("DD/MM/YYYY");
+		String today = formatter.format(date);
+		System.out.println("Today : " + today);
+
+		return today;
+	}
 }
