@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crodriguezt.dev.privpasarelaapi.common.GenericUtils;
+import com.crodriguezt.dev.privpasarelaapi.model.response.ResponseCatalogoDocumAcad;
 import com.crodriguezt.dev.privpasarelaapi.model.response.ResponseCrearInvoice;
+import com.crodriguezt.dev.privpasarelaapi.model.response.Services;
 
 @RestController
 @RequestMapping("/v1")
@@ -96,6 +100,7 @@ public class EndpointController {
 	@RequestMapping(value = "/erp/invoice/crear", method = RequestMethod.GET)
 	public ResponseCrearInvoice crearInvoiceErp() {
 
+		System.out.println("GET SYSOUT: llego a /erp/invoice/crear");
 		ResponseCrearInvoice response = new ResponseCrearInvoice();
 
 		String uuid = UUID.randomUUID().toString();
@@ -103,8 +108,6 @@ public class EndpointController {
 		int internalID = ThreadLocalRandom.current().nextInt(1020030, 1020099);
 		int consecutive = ThreadLocalRandom.current().nextInt(10000, 10200);
 		String fechaHoy = obtenerFechaHoyDDMMYYYY();
-		System.out.println("SYSOUT: llego a /erp/invoice/crear");
-		logger.info("logger: llego a /erp/invoice/crear");
 
 		response.setStatus("OK");
 		response.setMessage("Success");
@@ -116,8 +119,11 @@ public class EndpointController {
 
 		return response;
 	}
+
 	@RequestMapping(value = "/erp/invoice/crear", method = RequestMethod.POST)
 	public ResponseCrearInvoice crearInvoiceErpPost() {
+
+		System.out.println("POST SYSOUT: llego a /erp/invoice/crear");
 
 		ResponseCrearInvoice response = new ResponseCrearInvoice();
 
@@ -126,8 +132,6 @@ public class EndpointController {
 		int internalID = ThreadLocalRandom.current().nextInt(1020030, 1020099);
 		int consecutive = ThreadLocalRandom.current().nextInt(10000, 10200);
 		String fechaHoy = obtenerFechaHoyDDMMYYYY();
-		System.out.println("SYSOUT: llego a /erp/invoice/crear");
-		logger.info("logger: llego a /erp/invoice/crear");
 
 		response.setStatus("OK");
 		response.setMessage("Success");
@@ -136,6 +140,46 @@ public class EndpointController {
 		response.setInternalID(new BigDecimal(internalID));
 		response.setConsecutive("BO-2018-" + consecutive);
 		response.setDate(fechaHoy);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/erp/catalogo/documAcad", method = RequestMethod.GET)
+	public ResponseCatalogoDocumAcad obtenerCatalogo() {
+
+		System.out.println("GET SYSOUT: llego a /erp/catalogo/documAcad");
+
+		String uuid = UUID.randomUUID().toString();
+		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
+
+		List<Services> lista = generarCatalogo();
+		ResponseCatalogoDocumAcad response = new ResponseCatalogoDocumAcad();
+
+		response.setStatus("OK");
+		response.setMessage("Success");
+		response.setUuid(uuid);
+		response.setIdlog(String.valueOf(idLog));
+		response.setServices(lista);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/erp/catalogo/documAcad", method = RequestMethod.POST)
+	public ResponseCatalogoDocumAcad obtenerCatalogoPost() {
+
+		System.out.println("GET SYSOUT: llego a /erp/catalogo/documAcad");
+
+		String uuid = UUID.randomUUID().toString();
+		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
+
+		List<Services> lista = generarCatalogo();
+		ResponseCatalogoDocumAcad response = new ResponseCatalogoDocumAcad();
+
+		response.setStatus("OK");
+		response.setMessage("Success");
+		response.setUuid(uuid);
+		response.setIdlog(String.valueOf(idLog));
+		response.setServices(lista);
 
 		return response;
 	}
@@ -148,5 +192,39 @@ public class EndpointController {
 		System.out.println("Today : " + today);
 
 		return today;
+	}
+
+	public List<Services> generarCatalogo() {
+
+		Services item = new Services();
+		List<Services> lista = new ArrayList<Services>();
+
+		item.setId("30");
+		item.setName("Certificado de notas");
+		item.setUnitAmountPEN(new BigDecimal("50"));
+		lista.add(item);
+		item = new Services();
+		item.setId("31");
+		item.setName("Certificado de estudios");
+		item.setUnitAmountPEN(new BigDecimal("51"));
+		lista.add(item);
+		item = new Services();
+		item.setId("32");
+		item.setName("Constancia de egresado");
+		item.setUnitAmountPEN(new BigDecimal("52"));
+		lista.add(item);
+		item = new Services();
+		item.setId("33");
+		item.setName("Constancia de matricula");
+		item.setUnitAmountPEN(new BigDecimal("53"));
+		lista.add(item);
+		item = new Services();
+		item.setId("34");
+		item.setName("Certificado de no indisciplina");
+		item.setUnitAmountPEN(new BigDecimal("75"));
+		lista.add(item);
+
+		return lista;
+
 	}
 }
