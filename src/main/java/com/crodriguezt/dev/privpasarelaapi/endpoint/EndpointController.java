@@ -111,7 +111,7 @@ public class EndpointController {
 		response.setUuid(uuid);
 		response.setIdlog(String.valueOf(idLog));
 		response.setInternalID(new BigDecimal(internalID));
-		response.setConsecutive("BO-2018" + consecutive);
+		response.setConsecutive("BO-2018-" + consecutive);
 		response.setDate(fechaHoy);
 
 		return response;
@@ -120,7 +120,7 @@ public class EndpointController {
 	public static String obtenerFechaHoyDDMMYYYY() {
 
 		Date date = Calendar.getInstance().getTime();
-		DateFormat formatter = new SimpleDateFormat("DD/MM/YYYY");
+		DateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
 		String today = formatter.format(date);
 		System.out.println("Today : " + today);
 
