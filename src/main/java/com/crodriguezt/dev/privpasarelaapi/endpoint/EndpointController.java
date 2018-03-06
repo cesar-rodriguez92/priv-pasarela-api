@@ -21,7 +21,8 @@ public class EndpointController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/test3", method = RequestMethod.POST)
-	public String endpoint3(@RequestParam Map<String, String> allRequestParams) {
+	public String endpoint3(
+			@RequestParam Map<String, String> allRequestParams) {
 		logger.info("\n\n\n\n\n");
 		logger.info("-> Llego a endpoint2 test2");
 		logger.info("--> Inicia llamada a UtecResource");
@@ -29,6 +30,7 @@ public class EndpointController {
 		// UtecResource<String> response = handleSuccessResponse();
 		// response.setContent("Pago registrado en Netsuite");
 		String response = "Pago registrado en Netsuite";
+		logger.info("fin test 3");
 		return response;
 
 	}
@@ -50,36 +52,37 @@ public class EndpointController {
 	}
 
 	@RequestMapping(value = "/test5", method = RequestMethod.GET)
-	public String generateSignature(@RequestParam String apiKey, @RequestParam String merchantId,
-			@RequestParam String referenceCode, @RequestParam String monto, @RequestParam String moneda) {
+	public String generateSignature(@RequestParam String apiKey,
+			@RequestParam String merchantId, @RequestParam String referenceCode,
+			@RequestParam String monto, @RequestParam String moneda) {
 		String resultado = "";
 		String separador = "~";
-		String textToHash = apiKey + separador + merchantId + separador + referenceCode + separador + monto + separador
-				+ moneda;
+		String textToHash = apiKey + separador + merchantId + separador
+				+ referenceCode + separador + monto + separador + moneda;
 		byte[] encodedHash = null;
 		System.out.println("Inicia proceso hash");
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			System.out.println("MD instance ok");
 			encodedHash = md.digest(textToHash.getBytes("UTF-8"));
-			System.out.println("encodedHash: md.digest OK" );
+			System.out.println("encodedHash: md.digest OK");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("sysout hash: " + GenericUtils.bytesToHex(encodedHash));
+		System.out.println(
+				"sysout hash: " + GenericUtils.bytesToHex(encodedHash));
 		resultado = GenericUtils.bytesToHex(encodedHash);
 		return "Hash: " + resultado;
 	}
-	
-	@RequestMapping(value="/logger", method=RequestMethod.GET)
-	public String simulateLogSave( HttpServletRequest request){
+
+	@RequestMapping(value = "/logger", method = RequestMethod.GET)
+	public String simulateLogSave(HttpServletRequest request) {
 		logger.info("Grabando en base de datos");
 		logger.info("IP: " + request.getRemoteAddr());
 		logger.info("IP: " + request.getRemoteUser());
 		return "LOG-OK";
 	}
-	
 
 }
