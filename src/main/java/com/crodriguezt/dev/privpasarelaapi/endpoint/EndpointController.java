@@ -167,7 +167,7 @@ public class EndpointController {
 	@RequestMapping(value = "/erp/catalogo/documAcad", method = RequestMethod.POST)
 	public ResponseCatalogoDocumAcad obtenerCatalogoPost() {
 
-		System.out.println("GET SYSOUT: llego a /erp/catalogo/documAcad");
+		System.out.println("POST SYSOUT: llego a /erp/catalogo/documAcad");
 
 		String uuid = UUID.randomUUID().toString();
 		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
