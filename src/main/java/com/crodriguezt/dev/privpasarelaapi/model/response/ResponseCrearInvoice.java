@@ -8,10 +8,9 @@ public class ResponseCrearInvoice {
 	private String message;
 	private String uuid;
 	private String idlog;
-	private BigDecimal internalID;
+	private BigDecimal internalId;
 	private String consecutive;
 	private String date;
-
 	public String getStatus() {
 		return status;
 	}
@@ -36,11 +35,11 @@ public class ResponseCrearInvoice {
 	public void setIdlog(String idlog) {
 		this.idlog = idlog;
 	}
-	public BigDecimal getInternalID() {
-		return internalID;
+	public BigDecimal getInternalId() {
+		return internalId;
 	}
-	public void setInternalID(BigDecimal internalID) {
-		this.internalID = internalID;
+	public void setInternalId(BigDecimal internalId) {
+		this.internalId = internalId;
 	}
 	public String getConsecutive() {
 		return consecutive;
@@ -54,12 +53,11 @@ public class ResponseCrearInvoice {
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 	@Override
 	public String toString() {
 		return "ResponseCrearInvoice [status=" + status + ", message=" + message
-				+ ", uuid=" + uuid + ", idlog=" + idlog + ", internalID="
-				+ internalID + ", consecutive=" + consecutive + ", date=" + date
+				+ ", uuid=" + uuid + ", idlog=" + idlog + ", internalId="
+				+ internalId + ", consecutive=" + consecutive + ", date=" + date
 				+ "]";
 	}
 

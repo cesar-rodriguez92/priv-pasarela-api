@@ -113,7 +113,7 @@ public class EndpointController {
 		response.setMessage("Success");
 		response.setUuid(uuid);
 		response.setIdlog(String.valueOf(idLog));
-		response.setInternalID(new BigDecimal(internalID));
+		response.setInternalId(new BigDecimal(internalID));
 		response.setConsecutive("BO-2018-" + consecutive);
 		response.setDate(fechaHoy);
 
@@ -129,7 +129,7 @@ public class EndpointController {
 
 		String uuid = UUID.randomUUID().toString();
 		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
-		int internalID = ThreadLocalRandom.current().nextInt(1020030, 1020099);
+		int internalId = ThreadLocalRandom.current().nextInt(1020030, 1020099);
 		int consecutive = ThreadLocalRandom.current().nextInt(10000, 10200);
 		String fechaHoy = obtenerFechaHoyDDMMYYYY();
 
@@ -137,7 +137,7 @@ public class EndpointController {
 		response.setMessage("Success");
 		response.setUuid(uuid);
 		response.setIdlog(String.valueOf(idLog));
-		response.setInternalID(new BigDecimal(internalID));
+		response.setInternalId(new BigDecimal(internalId));
 		response.setConsecutive("BO-2018-" + consecutive);
 		response.setDate(fechaHoy);
 
