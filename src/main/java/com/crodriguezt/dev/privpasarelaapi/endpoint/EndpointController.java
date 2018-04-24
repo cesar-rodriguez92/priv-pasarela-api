@@ -1,5 +1,6 @@
 package com.crodriguezt.dev.privpasarelaapi.endpoint;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DateFormat;
@@ -126,6 +127,9 @@ public class EndpointController {
 		System.out.println("POST SYSOUT: llego a /erp/invoice/crear");
 
 		ResponseCrearInvoice response = new ResponseCrearInvoice();
+		
+		File fileInternal = new File("internalId.txt");
+		File fileConsec = new File("consecutive.txt");
 
 		String uuid = UUID.randomUUID().toString();
 		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
@@ -200,38 +204,43 @@ public class EndpointController {
 		List<Services> lista = new ArrayList<Services>();
 
 		item.setId("108");
-		item.setName("Certificado de estudios (espanol)");
+		item.setName("Certificado de estudios (español)");
 		item.setUnitAmountPEN(new BigDecimal("120.00"));
 		lista.add(item);
 		item = new Services();
 		item.setId("110");
-		item.setName("Certificado de notas (por cada semestre academico) (espanol)");
+		item.setName("Certificado de notas (por cada semestre académico) (español)");
 		item.setUnitAmountPEN(new BigDecimal("85"));
 		lista.add(item);
 		item = new Services();
 		item.setId("112");
-		item.setName("Constancia de Egresado (espanol)");
+		item.setName("Constancia de Egresado (español)");
 		item.setUnitAmountPEN(new BigDecimal("120"));
 		lista.add(item);
 		item = new Services();
 		item.setId("114");
-		item.setName("Constancia de Estudios (espanol)");
+		item.setName("Constancia de Estudios (español)");
 		item.setUnitAmountPEN(new BigDecimal("60"));
 		lista.add(item);
 		item = new Services();
 		item.setId("116");
-		item.setName("Constancia de Matricula (espanol)");
+		item.setName("Constancia de Matrícula (español)");
 		item.setUnitAmountPEN(new BigDecimal("60"));
 		lista.add(item);
 		item = new Services();
 		item.setId("118");
-		item.setName("Constancia de No Baja por Disciplina (espanol)");
+		item.setName("Constancia de No Baja por Disciplina (español)");
 		item.setUnitAmountPEN(new BigDecimal("60"));
 		lista.add(item);
 		item = new Services();
 		item.setId("120");
-		item.setName("Constancia de Orden de merito y promedio ponderado acumulado (espanol)");
+		item.setName("Constancia de Orden de mérito y promedio ponderado acumulado (español)");
 		item.setUnitAmountPEN(new BigDecimal("60"));
+		lista.add(item);
+		item = new Services();
+		item.setId("121");
+		item.setName("Solicitud de Trámite de Bachiller");
+		item.setUnitAmountPEN(new BigDecimal("1500"));
 		lista.add(item);
 
 		return lista;
