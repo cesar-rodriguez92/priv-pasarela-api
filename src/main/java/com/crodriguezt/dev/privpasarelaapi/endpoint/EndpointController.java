@@ -104,21 +104,36 @@ public class EndpointController {
 	@RequestMapping(value = "/erp/invoice/crear", method = RequestMethod.GET)
 	public ResponseCrearInvoice crearInvoiceErp() {
 
-		System.out.println("GET SYSOUT: llego a /erp/invoice/crear");
+		System.out.println("POST SYSOUT: llego a /erp/invoice/crear");
+
 		ResponseCrearInvoice response = new ResponseCrearInvoice();
+
+		BigDecimal bigDecInternal = null;
+		BigDecimal bigDecConsec = null;
+		BigDecimal bgUno = new BigDecimal("1");
+		String internalId = null;
+		String consecutive = null;
+		String fn1 = "internalId.txt";
+		String fn2 = "consecutive.txt";
+		internalId = leerArchivo(fn1);
+		consecutive = leerArchivo(fn2);
+		bigDecInternal = new BigDecimal(internalId).add(bgUno);
+		bigDecConsec = new BigDecimal(consecutive).add(bgUno);
+		logger.info("Nuevo intarnalId: " + bigDecInternal.toString());
+		logger.info("Nuevo consecutive: " +bigDecConsec.toString());
+		guardarArchivo(fn1, bigDecInternal.toString());
+		guardarArchivo(fn2, bigDecConsec.toString());
 
 		String uuid = UUID.randomUUID().toString();
 		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
-		int internalID = ThreadLocalRandom.current().nextInt(1020030, 1020099);
-		int consecutive = ThreadLocalRandom.current().nextInt(10000, 10200);
 		String fechaHoy = obtenerFechaHoyDDMMYYYY();
 
 		response.setStatus("OK");
 		response.setMessage("Success");
 		response.setUuid(uuid);
 		response.setIdlog(String.valueOf(idLog));
-		response.setInternalId(new BigDecimal(internalID));
-		response.setConsecutive("BO-2018-" + consecutive);
+		response.setInternalId(bigDecInternal);
+		response.setConsecutive("BO-2018-" + bigDecConsec.toString());
 		response.setDate(fechaHoy);
 
 		return response;
