@@ -1,6 +1,9 @@
 package com.crodriguezt.dev.privpasarelaapi.endpoint;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DateFormat;
@@ -127,22 +130,33 @@ public class EndpointController {
 		System.out.println("POST SYSOUT: llego a /erp/invoice/crear");
 
 		ResponseCrearInvoice response = new ResponseCrearInvoice();
-		
-		File fileInternal = new File("internalId.txt");
-		File fileConsec = new File("consecutive.txt");
+
+		BigDecimal bigDecInternal = null;
+		BigDecimal bigDecConsec = null;
+		BigDecimal bgUno = new BigDecimal("1");
+		String internalId = null;
+		String consecutive = null;
+		String fn1 = "internalId.txt";
+		String fn2 = "consecutive.txt";
+		internalId = leerArchivo(fn1);
+		consecutive = leerArchivo(fn2);
+		bigDecInternal = new BigDecimal(internalId).add(bgUno);
+		bigDecConsec = new BigDecimal(consecutive).add(bgUno);
+		System.out.println(bigDecInternal);
+		System.out.println(bigDecConsec);
+		guardarArchivo(fn1, bigDecInternal.toString());
+		guardarArchivo(fn2, bigDecConsec.toString());
 
 		String uuid = UUID.randomUUID().toString();
 		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
-		int internalId = ThreadLocalRandom.current().nextInt(1020030, 1020099);
-		int consecutive = ThreadLocalRandom.current().nextInt(10000, 10200);
 		String fechaHoy = obtenerFechaHoyDDMMYYYY();
 
 		response.setStatus("OK");
 		response.setMessage("Success");
 		response.setUuid(uuid);
 		response.setIdlog(String.valueOf(idLog));
-		response.setInternalId(new BigDecimal(internalId));
-		response.setConsecutive("BO-2018-" + consecutive);
+		response.setInternalId(bigDecInternal);
+		response.setConsecutive("BO-2018-" + bigDecConsec.toString());
 		response.setDate(fechaHoy);
 
 		return response;
@@ -209,7 +223,8 @@ public class EndpointController {
 		lista.add(item);
 		item = new Services();
 		item.setId("110");
-		item.setName("Certificado de notas (por cada semestre académico) (español)");
+		item.setName(
+				"Certificado de notas (por cada semestre académico) (español)");
 		item.setUnitAmountPEN(new BigDecimal("85"));
 		lista.add(item);
 		item = new Services();
@@ -234,7 +249,8 @@ public class EndpointController {
 		lista.add(item);
 		item = new Services();
 		item.setId("120");
-		item.setName("Constancia de Orden de mérito y promedio ponderado acumulado (español)");
+		item.setName(
+				"Constancia de Orden de mérito y promedio ponderado acumulado (español)");
 		item.setUnitAmountPEN(new BigDecimal("60"));
 		lista.add(item);
 		item = new Services();
@@ -245,5 +261,37 @@ public class EndpointController {
 
 		return lista;
 
+	}
+
+	private String leerArchivo(String fileName) {
+
+		String respuesta = null;
+		try {
+			FileReader fr1 = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fr1);
+			String line = null;
+			while ((line = bufferedReader.readLine()) != null) {
+				respuesta = line;
+				System.out.println("Read: " + respuesta);
+			}
+			bufferedReader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return respuesta;
+	}
+
+	private void guardarArchivo(String fileName, String texto) {
+
+		try {
+			FileWriter fileWriter = new FileWriter(fileName);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+			bufferedWriter.write(texto);
+			bufferedWriter.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
