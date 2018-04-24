@@ -131,7 +131,7 @@ public class EndpointController {
 		response.setStatus("OK");
 		response.setMessage("Success");
 		response.setUuid(uuid);
-		response.setIdlog(String.valueOf(idLog));
+		response.setIdLog(String.valueOf(idLog));
 		response.setInternalId(bigDecInternal);
 		response.setConsecutive("BO-2018-" + bigDecConsec.toString());
 		response.setDate(fechaHoy);
@@ -169,7 +169,7 @@ public class EndpointController {
 		response.setStatus("OK");
 		response.setMessage("Success");
 		response.setUuid(uuid);
-		response.setIdlog(String.valueOf(idLog));
+		response.setIdLog(String.valueOf(idLog));
 		response.setInternalId(bigDecInternal);
 		response.setConsecutive("BO-2018-" + bigDecConsec.toString());
 		response.setDate(fechaHoy);
