@@ -142,8 +142,8 @@ public class EndpointController {
 		consecutive = leerArchivo(fn2);
 		bigDecInternal = new BigDecimal(internalId).add(bgUno);
 		bigDecConsec = new BigDecimal(consecutive).add(bgUno);
-		System.out.println(bigDecInternal);
-		System.out.println(bigDecConsec);
+		logger.info("Nuevo intarnalId: " + bigDecInternal.toString());
+		logger.info("Nuevo consecutive: " +bigDecConsec.toString());
 		guardarArchivo(fn1, bigDecInternal.toString());
 		guardarArchivo(fn2, bigDecConsec.toString());
 
