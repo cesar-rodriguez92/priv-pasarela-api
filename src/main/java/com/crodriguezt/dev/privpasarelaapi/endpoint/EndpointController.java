@@ -380,7 +380,7 @@ public class EndpointController {
 		response.setDate(fechaHoy);
 		try {
 			logger.info("Inicia Delay");
-			TimeUnit.SECONDS.sleep(60);
+			TimeUnit.SECONDS.sleep(25);
 			logger.info("Fin Delay, respuesta");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -424,7 +424,7 @@ public class EndpointController {
 		response.setDate(fechaHoy);
 		try {
 			logger.info("Inicia Delay");
-			TimeUnit.SECONDS.sleep(60);
+			TimeUnit.SECONDS.sleep(25);
 			logger.info("Fin Delay, respuesta");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
