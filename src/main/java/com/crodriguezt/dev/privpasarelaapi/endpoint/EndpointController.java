@@ -11,10 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,14 +41,14 @@ public class EndpointController {
 	@RequestMapping(value = "/test3", method = RequestMethod.POST)
 	public String endpoint3(
 			@RequestParam Map<String, String> allRequestParams) {
-		logger.info("\n\n\n\n\n");
-		logger.info("-> Llego a endpoint2 test2");
-		logger.info("--> Inicia llamada a UtecResource");
-		logger.info("---> allRequestParams   " + allRequestParams);
+		System.out.println("\n\n\n\n\n");
+		System.out.println("-> Llego a endpoint2 test2");
+		System.out.println("--> Inicia llamada a UtecResource");
+		System.out.println("---> allRequestParams   " + allRequestParams);
 		// UtecResource<String> response = handleSuccessResponse();
 		// response.setContent("Pago registrado en Netsuite");
 		String response = "Pago registrado en Netsuite";
-		logger.info("fin test 3");
+		System.out.println("fin test 3");
 		return response;
 
 	}
@@ -54,7 +56,7 @@ public class EndpointController {
 	@RequestMapping(value = "/test2", method = RequestMethod.GET)
 	public String enpoint4() {
 		System.out.println("SYSOUT: llego a endpoint 4");
-		logger.info("logger: llego a endpoint 4");
+		System.out.println("logger: llego a endpoint 4");
 
 		return "Respuesta exitosa";
 	}
@@ -62,7 +64,7 @@ public class EndpointController {
 	@RequestMapping(value = "/test4", method = RequestMethod.POST)
 	public String enpoint5() {
 		System.out.println("SYSOUT: llego a endpoint 4");
-		logger.info("logger: llego a endpoint 4");
+		System.out.println("logger: llego a endpoint 4");
 
 		return "Respuesta exitosa";
 	}
@@ -95,9 +97,9 @@ public class EndpointController {
 
 	@RequestMapping(value = "/logger", method = RequestMethod.GET)
 	public String simulateLogSave(HttpServletRequest request) {
-		logger.info("Grabando en base de datos");
-		logger.info("IP: " + request.getRemoteAddr());
-		logger.info("IP: " + request.getRemoteUser());
+		System.out.println("Grabando en base de datos");
+		System.out.println("IP: " + request.getRemoteAddr());
+		System.out.println("IP: " + request.getRemoteUser());
 		return "LOG-OK";
 	}
 
@@ -119,8 +121,8 @@ public class EndpointController {
 		consecutive = leerArchivo(fn2);
 		bigDecInternal = new BigDecimal(internalId).add(bgUno);
 		bigDecConsec = new BigDecimal(consecutive).add(bgUno);
-		logger.info("Nuevo intarnalId: " + bigDecInternal.toString());
-		logger.info("Nuevo consecutive: " +bigDecConsec.toString());
+		System.out.println("Nuevo intarnalId: " + bigDecInternal.toString());
+		System.out.println("Nuevo consecutive: " + bigDecConsec.toString());
 		guardarArchivo(fn1, bigDecInternal.toString());
 		guardarArchivo(fn2, bigDecConsec.toString());
 
@@ -157,8 +159,8 @@ public class EndpointController {
 		consecutive = leerArchivo(fn2);
 		bigDecInternal = new BigDecimal(internalId).add(bgUno);
 		bigDecConsec = new BigDecimal(consecutive).add(bgUno);
-		logger.info("Nuevo intarnalId: " + bigDecInternal.toString());
-		logger.info("Nuevo consecutive: " +bigDecConsec.toString());
+		System.out.println("Nuevo intarnalId: " + bigDecInternal.toString());
+		System.out.println("Nuevo consecutive: " + bigDecConsec.toString());
 		guardarArchivo(fn1, bigDecInternal.toString());
 		guardarArchivo(fn2, bigDecConsec.toString());
 
@@ -308,5 +310,65 @@ public class EndpointController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@RequestMapping(value = "/erp/invoice/crear/error", method = RequestMethod.POST)
+	public Map<String, Object> crearInvoiceErpPostErrorText() {
+
+		System.out
+				.println("POST SYSOUT: llego a /erp/invoice/crear/error/text");
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("internalId", "");
+		map.put("message",
+				"\"ERROR: Cannot read property \"text\" from undefined");
+		map.put("uuid", UUID.randomUUID().toString());
+		map.put("idLog", 158401);
+		System.out.println("Response de servicio: " + map);
+		return map;
+	}
+
+	@RequestMapping(value = "/erp/invoice/crear/delay", method = RequestMethod.POST)
+	public ResponseCrearInvoice crearInvoiceErpPostDelay() {
+
+		System.out.println("POST SYSOUT: llego a /erp/invoice/crear/delay");
+
+		ResponseCrearInvoice response = new ResponseCrearInvoice();
+
+		BigDecimal bigDecInternal = null;
+		BigDecimal bigDecConsec = null;
+		BigDecimal bgUno = new BigDecimal("1");
+		String internalId = null;
+		String consecutive = null;
+		String fn1 = "internalId.txt";
+		String fn2 = "consecutive.txt";
+		internalId = leerArchivo(fn1);
+		consecutive = leerArchivo(fn2);
+		bigDecInternal = new BigDecimal(internalId).add(bgUno);
+		bigDecConsec = new BigDecimal(consecutive).add(bgUno);
+		System.out.println("Nuevo intarnalId: " + bigDecInternal.toString());
+		System.out.println("Nuevo consecutive: " + bigDecConsec.toString());
+		guardarArchivo(fn1, bigDecInternal.toString());
+		guardarArchivo(fn2, bigDecConsec.toString());
+
+		String uuid = UUID.randomUUID().toString();
+		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
+		String fechaHoy = obtenerFechaHoyDDMMYYYY();
+
+		response.setStatus("OK");
+		response.setMessage("Success");
+		response.setUuid(uuid);
+		response.setIdLog(String.valueOf(idLog));
+		response.setInternalId(bigDecInternal);
+		response.setConsecutive("BO-2018-" + bigDecConsec.toString());
+		response.setDate(fechaHoy);
+		try {
+			logger.info("Inicia Delay");
+			TimeUnit.SECONDS.sleep(60);
+			logger.info("Fin Delay, respuesta");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return response;
 	}
 }
