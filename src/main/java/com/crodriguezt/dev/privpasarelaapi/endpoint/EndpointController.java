@@ -328,8 +328,68 @@ public class EndpointController {
 		return map;
 	}
 
+	@RequestMapping(value = "/erp/invoice/crear/error", method = RequestMethod.GET)
+	public Map<String, Object> crearInvoiceErpGetErrorText() {
+
+		System.out
+				.println("POST SYSOUT: llego a /erp/invoice/crear/error/text");
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("internalId", "");
+		map.put("message",
+				"\"ERROR: Cannot read property \"text\" from undefined");
+		map.put("uuid", UUID.randomUUID().toString());
+		map.put("idLog", 158401);
+		System.out.println("Response de servicio: " + map);
+		return map;
+	}
+
 	@RequestMapping(value = "/erp/invoice/crear/delay", method = RequestMethod.POST)
 	public ResponseCrearInvoice crearInvoiceErpPostDelay() {
+
+		System.out.println("POST SYSOUT: llego a /erp/invoice/crear/delay");
+
+		ResponseCrearInvoice response = new ResponseCrearInvoice();
+
+		BigDecimal bigDecInternal = null;
+		BigDecimal bigDecConsec = null;
+		BigDecimal bgUno = new BigDecimal("1");
+		String internalId = null;
+		String consecutive = null;
+		String fn1 = "internalId.txt";
+		String fn2 = "consecutive.txt";
+		internalId = leerArchivo(fn1);
+		consecutive = leerArchivo(fn2);
+		bigDecInternal = new BigDecimal(internalId).add(bgUno);
+		bigDecConsec = new BigDecimal(consecutive).add(bgUno);
+		System.out.println("Nuevo intarnalId: " + bigDecInternal.toString());
+		System.out.println("Nuevo consecutive: " + bigDecConsec.toString());
+		guardarArchivo(fn1, bigDecInternal.toString());
+		guardarArchivo(fn2, bigDecConsec.toString());
+
+		String uuid = UUID.randomUUID().toString();
+		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
+		String fechaHoy = obtenerFechaHoyDDMMYYYY();
+
+		response.setStatus("OK");
+		response.setMessage("Success");
+		response.setUuid(uuid);
+		response.setIdLog(String.valueOf(idLog));
+		response.setInternalId(bigDecInternal);
+		response.setConsecutive("BO-2018-" + bigDecConsec.toString());
+		response.setDate(fechaHoy);
+		try {
+			logger.info("Inicia Delay");
+			TimeUnit.SECONDS.sleep(60);
+			logger.info("Fin Delay, respuesta");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	@RequestMapping(value = "/erp/invoice/crear/delay", method = RequestMethod.GET)
+	public ResponseCrearInvoice crearInvoiceErpGetDelay() {
 
 		System.out.println("POST SYSOUT: llego a /erp/invoice/crear/delay");
 
