@@ -275,6 +275,11 @@ public class EndpointController {
 		item.setName("Solicitud de Trámite de Bachiller");
 		item.setUnitAmountPEN(new BigDecimal("1500"));
 		lista.add(item);
+		item = new Services();
+		item.setId("200");
+		item.setName("Constancia de Notas Pronabec (Español)");
+		item.setUnitAmountPEN(new BigDecimal("180"));
+		lista.add(item);
 
 		return lista;
 
