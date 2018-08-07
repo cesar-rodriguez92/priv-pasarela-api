@@ -280,6 +280,11 @@ public class EndpointController {
 		item.setName("Constancia de Notas Pronabec (Español)");
 		item.setUnitAmountPEN(new BigDecimal("180"));
 		lista.add(item);
+		item = new Services();
+		item.setId("210");
+		item.setName("Constancia de Matrícula Pronabec (Español)");
+		item.setUnitAmountPEN(new BigDecimal("150"));
+		lista.add(item);
 
 		return lista;
 
