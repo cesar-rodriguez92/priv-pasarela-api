@@ -21,7 +21,17 @@ public class FakeController {
 	private FakeService fakeService;
 
 	@RequestMapping(value = "/erp/invoice/crear/timeOut", method = RequestMethod.GET)
-	public Map<String, Object> crearInvoiceErpErrorTimeout() {
+	public Map<String, Object> crearInvoiceErpErrorTimeoutGet() {
+
+		logger.info("Inicio Crear boleta TimeOut");
+		System.out.println("POST SYSOUT: llego a /erp/invoice/crear/timeOut");
+		Map<String, Object> response = fakeService.responseErpTimeOut();
+		logger.info("Response de timeOut: " + response);
+		return response;
+	}
+
+	@RequestMapping(value = "/erp/invoice/crear/timeOut", method = RequestMethod.POST)
+	public Map<String, Object> crearInvoiceErpErrorTimeoutPost() {
 
 		logger.info("Inicio Crear boleta TimeOut");
 		System.out.println("POST SYSOUT: llego a /erp/invoice/crear/timeOut");
