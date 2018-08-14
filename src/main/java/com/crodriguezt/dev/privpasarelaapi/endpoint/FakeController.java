@@ -1,5 +1,6 @@
 package com.crodriguezt.dev.privpasarelaapi.endpoint;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -19,6 +20,26 @@ public class FakeController {
 
 	@Autowired
 	private FakeService fakeService;
+
+	@RequestMapping(method = RequestMethod.GET)
+	public Map<String, Object> ini() {
+
+		logger.info("Fake INI");
+		Map<String, Object> response = new HashMap<>();
+		response.put("status", "INI");
+		logger.info("Response de Fake INI: " + response);
+		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public Map<String, Object> iniPost() {
+
+		logger.info("Fake INI");
+		Map<String, Object> response = new HashMap<>();
+		response.put("status", "INI");
+		logger.info("Response de Fake INI: " + response);
+		return response;
+	}
 
 	@RequestMapping(value = "/erp/invoice/crear/timeOut", method = RequestMethod.GET)
 	public Map<String, Object> crearInvoiceErpErrorTimeoutGet() {
