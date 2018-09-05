@@ -92,59 +92,6 @@ public class FakeServiceImpl implements FakeService {
 				new BigDecimal("0"), null);
 		lista.add(item);
 
-		item = new Services();
-		item.setId("110");
-		item.setName(
-				"Certificado de notas (por cada semestre académico) (español)");
-		item.setUnitAmountPEN(new BigDecimal("85"));
-		lista.add(item);
-		item = new Services();
-		item.setId("112");
-		item.setName("Constancia de Egresado (español)");
-		item.setUnitAmountPEN(new BigDecimal("120"));
-		lista.add(item);
-		item = new Services();
-		item.setId("114");
-		item.setName("Constancia de Estudios (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("116");
-		item.setName("Constancia de Matrícula (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("118");
-		item.setName("Constancia de No Baja por Disciplina (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("120");
-		item.setName(
-				"Constancia de Orden de mérito y promedio ponderado acumulado (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("121");
-		item.setName("Solicitud de Trámite de Bachiller");
-		item.setUnitAmountPEN(new BigDecimal("1500"));
-		lista.add(item);
-		item = new Services();
-		item.setId("200");
-		item.setName("Constancia de Notas Pronabec (Español)");
-		item.setUnitAmountPEN(new BigDecimal("180"));
-		lista.add(item);
-		item = new Services();
-		item.setId("210");
-		item.setName("Constancia de Matrícula Pronabec (Español)");
-		item.setUnitAmountPEN(new BigDecimal("150"));
-		lista.add(item);
-		item = new Services();
-		item.setId("227");
-		item.setName("Constancia de Alto Rendimiento CAFED");
-		item.setUnitAmountPEN(new BigDecimal("0"));
-		lista.add(item);
-
 		return lista;
 	}
 
