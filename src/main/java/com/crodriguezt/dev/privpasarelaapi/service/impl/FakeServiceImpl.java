@@ -44,6 +44,9 @@ public class FakeServiceImpl implements FakeService {
 				"Certificado de notas (por cada semestre académico) (inglés)",
 				new BigDecimal("135"), null);
 		lista.add(item);
+		item = new Services("227", "Constancia de Alto Rendimiento CAFED - sim",
+				new BigDecimal("0"), null);
+		lista.add(item);
 		item = new Services("225", "Constancia de alto rendimiento PRONABEC",
 				new BigDecimal("0"), null);
 		lista.add(item);
@@ -87,9 +90,6 @@ public class FakeServiceImpl implements FakeService {
 		lista.add(item);
 		item = new Services("222", "Solicitud de Bachiller",
 				new BigDecimal("1500"), null);
-		lista.add(item);
-		item = new Services("227", "Constancia de Alto Rendimiento CAFED",
-				new BigDecimal("0"), null);
 		lista.add(item);
 
 		return lista;
