@@ -285,6 +285,11 @@ public class EndpointController {
 		item.setName("Constancia de Matrícula Pronabec (Español)");
 		item.setUnitAmountPEN(new BigDecimal("150"));
 		lista.add(item);
+		item = new Services();
+		item.setId("227");
+		item.setName("Constancia de Alto Rendimiento CAFED");
+		item.setUnitAmountPEN(new BigDecimal("0"));
+		lista.add(item);
 
 		return lista;
 
