@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,12 +32,16 @@ import com.crodriguezt.dev.privpasarelaapi.common.GenericUtils;
 import com.crodriguezt.dev.privpasarelaapi.model.response.ResponseCatalogoDocumAcad;
 import com.crodriguezt.dev.privpasarelaapi.model.response.ResponseCrearInvoice;
 import com.crodriguezt.dev.privpasarelaapi.model.response.Services;
+import com.crodriguezt.dev.privpasarelaapi.service.FakeService;
 
 @RestController
 @RequestMapping("/v1")
 public class EndpointController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private FakeService fakeService;
 
 	@RequestMapping(value = "/test3", method = RequestMethod.POST)
 	public String endpoint3(
@@ -187,7 +192,7 @@ public class EndpointController {
 		String uuid = UUID.randomUUID().toString();
 		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
 
-		List<Services> lista = generarCatalogo();
+		List<Services> lista = fakeService.generarCatalogo();
 		ResponseCatalogoDocumAcad response = new ResponseCatalogoDocumAcad();
 
 		response.setStatus("OK");
@@ -207,7 +212,7 @@ public class EndpointController {
 		String uuid = UUID.randomUUID().toString();
 		int idLog = ThreadLocalRandom.current().nextInt(1000, 2000);
 
-		List<Services> lista = generarCatalogo();
+		List<Services> lista = fakeService.generarCatalogo();
 		ResponseCatalogoDocumAcad response = new ResponseCatalogoDocumAcad();
 
 		response.setStatus("OK");
@@ -227,72 +232,6 @@ public class EndpointController {
 		System.out.println("Today : " + today);
 
 		return today;
-	}
-
-	public List<Services> generarCatalogo() {
-
-		Services item = new Services();
-		List<Services> lista = new ArrayList<Services>();
-
-		item.setId("108");
-		item.setName("Certificado de estudios (español)");
-		item.setUnitAmountPEN(new BigDecimal("120.00"));
-		lista.add(item);
-		item = new Services();
-		item.setId("110");
-		item.setName(
-				"Certificado de notas (por cada semestre académico) (español)");
-		item.setUnitAmountPEN(new BigDecimal("85"));
-		lista.add(item);
-		item = new Services();
-		item.setId("112");
-		item.setName("Constancia de Egresado (español)");
-		item.setUnitAmountPEN(new BigDecimal("120"));
-		lista.add(item);
-		item = new Services();
-		item.setId("114");
-		item.setName("Constancia de Estudios (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("116");
-		item.setName("Constancia de Matrícula (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("118");
-		item.setName("Constancia de No Baja por Disciplina (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("120");
-		item.setName(
-				"Constancia de Orden de mérito y promedio ponderado acumulado (español)");
-		item.setUnitAmountPEN(new BigDecimal("60"));
-		lista.add(item);
-		item = new Services();
-		item.setId("121");
-		item.setName("Solicitud de Trámite de Bachiller");
-		item.setUnitAmountPEN(new BigDecimal("1500"));
-		lista.add(item);
-		item = new Services();
-		item.setId("200");
-		item.setName("Constancia de Notas Pronabec (Español)");
-		item.setUnitAmountPEN(new BigDecimal("180"));
-		lista.add(item);
-		item = new Services();
-		item.setId("210");
-		item.setName("Constancia de Matrícula Pronabec (Español)");
-		item.setUnitAmountPEN(new BigDecimal("150"));
-		lista.add(item);
-		item = new Services();
-		item.setId("227");
-		item.setName("Constancia de Alto Rendimiento CAFED");
-		item.setUnitAmountPEN(new BigDecimal("0"));
-		lista.add(item);
-
-		return lista;
-
 	}
 
 	private String leerArchivo(String fileName) {

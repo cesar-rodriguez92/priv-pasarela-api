@@ -9,6 +9,19 @@ public class Services {
 	private BigDecimal unitAmountPEN;
 	private BigDecimal unitAmountUSD;
 
+	public Services() {
+		super();
+	}
+
+	public Services(String id, String name, BigDecimal unitAmountPEN,
+			BigDecimal unitAmountUSD) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.unitAmountPEN = unitAmountPEN;
+		this.unitAmountUSD = unitAmountUSD;
+	}
+
 	public String getId() {
 		return id;
 	}
